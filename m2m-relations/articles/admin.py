@@ -9,12 +9,10 @@ class ArticleTagInlineFormset(BaseInlineFormSet):
         
         tag_ids = set([form.cleaned_data['tag'].id for form in self.forms])
         is_main_ids = [str(form.cleaned_data['is_main']) for form in self.forms] 
-        count = is_main_ids.count("True")
-        print(count)
+        count = is_main_ids.count("True")        
         if len(tag_ids) != len(self.forms):                    
             raise ValidationError('Такой тег уже есть')
-        if "True"  not in is_main_ids:
-            print(is_main_ids)
+        if "True"  not in is_main_ids:            
             raise ValidationError('Укажите основной раздел')
         if count >1:
             raise ValidationError('Основным может быть только один раздел')
